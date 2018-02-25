@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1519580733 source:c:\users\lukas\documents\studia2(c++)\zadanie1\main.cpp
+	<iostream>
+	<math.h>
+	<string>
+	<vector>
+	<stdexcept>
+
