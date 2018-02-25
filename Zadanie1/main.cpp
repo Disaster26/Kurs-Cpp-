@@ -20,9 +20,27 @@ bool czyPierwsza (int64 liczba)
 
 int64 StringToInt64(string wejscie)
 {
+    int64 liczba=0;
+    string zakres="-9223372036854775808";
     try
     {
-        return stoll(wejscie);
+        for(int i=0;i<wejscie.size();i++){
+                if(i==wejscie.size()-1){
+                    if(wejscie==zakres){
+                        liczba=liczba*10;
+                        break;
+                }}
+                if(wejscie.at(i)=='-'){ if(i!=wejscie.size()-1) i++;} /// na wypadek gdyby np. 13123-
+                int64 cyfra=wejscie.at(i);
+                if(cyfra>=48 && cyfra<=57){ /// kody ascii od 0 do 9
+                    liczba=liczba*10;
+                    liczba=liczba+cyfra-'0';
+                }
+                else throw invalid_argument("Bledny argument2");
+        }
+        if(wejscie.at(0)=='-') liczba=liczba*(-1);
+        if(wejscie==zakres) liczba=liczba-(wejscie.at(wejscie.size()-1)-'0');
+        return liczba;
     }
     catch (const invalid_argument )
     {
@@ -34,9 +52,7 @@ int64 StringToInt64(string wejscie)
 vector <int64> Czynniki(int64 liczba)
 {
     vector <int64> odp;
-    int64 zakres = -9223372036854775808;
-    if(liczba==zakres) cout << "-1*";
-    if(liczba<0 && liczba!=zakres)
+    if(liczba<0)
     {
         cout << "-1*";
         liczba=liczba*-1;
